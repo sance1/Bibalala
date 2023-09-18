@@ -1,0 +1,872 @@
+﻿@using Bibalala.Data;
+@using Bibalala.Helpers;
+@inject IRepositories Repositories;
+@{
+    var lang = (string) ViewData["Language"];
+    var en = "";
+    var id = "";
+    var imageLangFirst = "/img/lang-ID.png";
+    var imageLangSecond = "/img/lang-EN.png";
+    var onClickFirst = "changeLanguage('id')";
+    var onClickSecond = "changeLanguage('en')";
+    var mainBanner = "main-banner-id.jpg";
+    var mainBannerMobile = "main-banner_mobile-id.jpg";
+    var contentPelHex = "content_pel-hex-id.jpg";
+
+    if (lang == "en")
+    {
+        en = "select-lang";
+        imageLangFirst = imageLangSecond;
+        onClickFirst = onClickSecond;
+        imageLangSecond = "/img/lang-ID.png";
+        onClickSecond = "changeLanguage('id')";
+        mainBanner = "main-banner-en.jpg";
+        mainBannerMobile = "main-banner_mobile-en.jpg";
+        contentPelHex = "content_pel-hex-en.png";
+    }
+    else
+    {
+        id = "select-lang";
+    }
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="initial-scale=1.0 , minimum-scale=1.0 , maximum-scale=1.0" />
+    <title>@Html.PortalText(Repositories,"Bibalala", "id")</title>
+    <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/grid.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@@fancyapps/ui/dist/fancybox.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link href="css/fullpage.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
+    <script src="js/fullpage.js" type="text/javascript"></script>
+</head>
+<body>
+
+    <!-- Part Now -->
+    <div id="errorModal" class="modal">
+        <div style="text-align: center; margin-bottom: 10px;" id="errorModalTitle"></div>
+        <div id="errorModalTxt"></div>
+    </div>
+    <!-- End Part Now -->
+
+
+    <h1>Pembelajaran bahasa inggris</h1>
+    <header>
+        <div class="container flex">
+            <div class="hamburgerBar mobile">
+                <span></span>
+            </div>
+            <div class="brand">
+                <a href="/"><img src="img/logo-bibalala.png" alt="logo"></a>
+            </div>
+            <div class="nav-wrap">
+                <img src="img/icon-closeNav.jpg" class="mobile closeNav" alt="" />
+                <img src="img/logo-mobile.jpg" class="mobile logo-mobile" alt="" />
+                <ul class="navigation">
+                    <li><a href="#Beranda" data-menuanchor="Beranda">@Html.PortalText(Repositories, "Home", "id")</a></li>
+                    <li><a href="#Konten-Pelajaran" data-menuanchor="Konten-Pelajaran">@Html.PortalText(Repositories, "Content", "id") </a></li>
+                    <li><a href="#Metode" data-menuanchor="Metode">@Html.PortalText(Repositories, "Method", "id")</a></li>
+                    <li><a href="#Fitur" data-menuanchor="Fitur">@Html.PortalText(Repositories, "Feature", "id")</a></li>
+                    <li><a href="#Tentang-Kami" data-menuanchor="Tentang-Kami">@Html.PortalText(Repositories, "OurGoal", "id")</a></li>
+                    <li><a href="#Hubungi-Kami" data-menuanchor="Hubungi-Kami">@Html.PortalText(Repositories, "Contact", "id")</a></li>
+                    @*<li><a href="#Unduh-Aplikasi" data-menuanchor="Unduh-Aplikasi">Unduh Aplikasi</a></li>*@
+                    <li><a href="#Kontak" data-menuanchor="Kontak">@Html.PortalText(Repositories, "Community", "id")</a></li>
+                </ul>
+
+                <div class="sosmed-wrap">
+                    <a href="https://www.facebook.com/bibalala.english" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/bibalala.english/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.youtube.com/channel/UC_1K5I7qyxazdrmyEwd6WNw" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="https://www.tiktok.com/@@bibalala.english" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+                </div>
+
+            </div>
+            <div id="langOption">
+                <div class="langSelect"><img src="@imageLangFirst" /> </div>
+                <ul class="dropdown-menu">
+                    <li onclick="@onClickFirst" class="dropdown-item @id"><img src="@imageLangFirst" /> </li>
+                    <li onclick="@onClickSecond" class="dropdown-item @en"><img src="@imageLangSecond" /> </li>
+                </ul>
+            </div>
+            <div class="overlay"></div>
+        </div>
+    </header>
+    
+    <div id="fullpage">
+        <section id="mainBanner" class="section">
+            <img src="img/@mainBanner" class="img-responsive desktop" alt="Main Banner" />
+            <img src="img/@mainBannerMobile" class="img-responsive mobile" alt="Main Banner" />
+            <div class="container" style="position: relative;">
+                <a href="img/Babilala_ English for Kids_2.mp4" data-fancybox id="playVideo"></a>
+            </div>
+            <div class="container">
+                <div class="col-xs-12 col-sm-9 wrapper no-pad">
+                    <h3>
+                        @Html.PortalText(Repositories,"BibalalaIsAnEnglishLanguageLearning", "id")
+                    </h3>
+                </div>
+            </div>
+        </section>
+
+        <section id="content-study" class="section">
+            <div class="content-pel_">
+                <div class="container">
+                    <div class="col-xs-12 col-sm-11 wrapper no-pad">
+                        <div class="col-xs-12 content-pel_ddl">
+                            <h2>@Html.PortalText(Repositories,"LessonContent", "id")</h2>
+                            <h3>@Html.PortalText(Repositories,"LessonContent1", "id")</h3>
+                            <img src="img/@contentPelHex" class="img-contentPel" alt="" />
+                        </div>
+                        <div class="content-pel_mem_wrap">
+                            <div class="container">
+                                <div class="col-xs-12 col-sm-11 col-md-10 wrapper content-pel_mem no-pad">
+                                    <div class="col-xs-12 col-sm-3 pic-act no-pad">
+                                        <img src="img/content-study-actor.png" alt="">
+                                    </div>
+                                    <div class="col-xs-12 col-sm-9 value-content-wrap">
+
+                                        <div class="value-content">
+                                            <div class="col-xs-4 no-pad val-card card-lesson">
+                                                <strong>360+</strong>
+                                                <p>@Html.PortalText(Repositories,"VideoInteraktif", "id")</p>
+                                            </div>
+                                            <div class="col-xs-4 no-pad val-card card-theme">
+                                                <strong>75</strong>
+                                                <p>@Html.PortalText(Repositories,"TopikPelajaran", "id")</p>
+                                            </div>
+                                            <div class="col-xs-4 no-pad val-card card-vocabulary">
+                                                <strong>3000</strong>
+                                                <p>@Html.PortalText(Repositories,"KosaKata", "id")</p>
+                                            </div>
+                                            <div class="col-xs-4 no-pad val-card card-sample">
+                                                <strong>200</strong>
+                                                <p>@Html.PortalText(Repositories,"ContohKalimat", "id")</p>
+                                            </div>
+                                            <div class="col-xs-4 no-pad val-card card-songs">
+                                                <strong>100</strong>
+                                                <p>@Html.PortalText(Repositories,"Lagu", "id")</p>
+                                            </div>
+                                            <div class="col-xs-4 no-pad val-card card-games">
+                                                <strong>5000</strong>
+                                                <p>@Html.PortalText(Repositories,"Permainan", "id")</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="methodeA" class="section">
+            <div class="container">
+                <div class="col-xs-12 col-sm-11 wrapper methode-learning methode-learning_top">
+                    <h2>@Html.PortalText(Repositories,"LearningMethods", "id")</h2>
+                    <h3>
+                        @Html.PortalText(Repositories,"LearningMethods1", "id")
+
+                    </h3>
+                    <div class="methode-learning_slide">
+                        <div class="item">
+                            <div class="sld col-xs-12">
+                                <div class="inside methode-feel">
+                                    <h4>@Html.PortalText(Repositories,"FeelingCreatingPositiveEmotions", "id")</h4>
+                                    <div class="text-inside">
+                                        @Html.PortalText(Repositories,"FeelingCreatingPositiveEmotions1", "id")
+                                    </div>
+                                    @Html.PortalText(Repositories, "Content", "en")
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="sld col-xs-12">
+                                <div class="inside encourage-feel">
+                                    <h4>@Html.PortalText(Repositories,"EncourageMotivateChildrenEveryTime", "id")</h4>
+                                    <div class="text-inside">
+                                        @Html.PortalText(Repositories,"EncourageMotivateChildrenEveryTime1", "id")
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="sld col-xs-12">
+                                <div class="inside sharing-feel">
+                                    <h4>@Html.PortalText(Repositories,"SharingSharingFeelingsAfterLearning", "id")</h4>
+                                    <div class="text-inside">
+                                        @Html.PortalText(Repositories,"SharingSharingFeelingsAfterLearning1", "id")
+                                        <img src="~/img/BoyGirlGIF.gif" class="gif-img" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="methodeB" class="section">
+            <div class="container">
+                <div class="col-xs-12 col-sm-11 col-md-10 wrapper methode-learning methode-learning_bot">
+                    <h2>@Html.PortalText(Repositories,"LearningFeatures", "id")</h2>
+                    <h3>@Html.PortalText(Repositories,"LearningFeatures1", "id")</h3>
+                    <div class="methode-learning_video flex">
+                        <div class="col-xs-12 col-sm-6">
+                            <div class="inside">
+                                <div class="videoThumb">
+                                    <a href="~/img/Video i-Speak-technology.mp4" data-fancybox><img src="~/img/video-thumb.jpg" alt="" /></a>
+                                </div>
+                                <div class="videoDesc">
+                                    <h4>@Html.PortalText(Repositories,"ISpeakTechnology", "id")</h4>
+                                    <p>
+                                        @Html.PortalText(Repositories,"ISpeakTechnology1", "id")
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6">
+                            <div class="inside">
+                                <div class="videoThumb">
+                                    <a href="~/img/Video Interactive.mp4" data-fancybox><img src="~/img/video-thumb2.jpg" alt="" /></a>
+                                </div>
+                                <div class="videoDesc">
+                                    <h4>@Html.PortalText(Repositories,"InteractionVideos", "id")</h4>
+                                    <p>
+                                        @Html.PortalText(Repositories,"InteractionVideos1", "id")
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="aboutUs" class="section">
+            <div class="container">
+                <div class="col-xs-12 col-sm-11 wrapper">
+                    <h2>@Html.PortalText(Repositories,"OurGoal1", "id")</h2>
+                    <div class="flex aboutusWrap">
+                        <div class="col-xs-12 col-sm-5">
+                            <div class="abousDetail flex">
+                                <div class="aboutText">
+                                    <h4>@Html.PortalText(Repositories,"VisionAndMission", "id")</h4>
+                                    <ul>
+                                        @Html.PortalText(Repositories,"ExploreTheMaximumPotential", "id")
+                                    </ul>
+                                </div>
+                                <img src="~/img/owlalaGIF.gif" class="olafGif" />
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-7">
+                            <div class="abousImage flex">
+                                <img src="~/img/about-img.png" class="img-about" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        @RenderBody()
+
+        @*<section id="download" class="section">
+                <div class="container">
+                    <div class="col-xs-12 col-sm-11 col-md-10 wrapper">
+                        <h2>Unduh Aplikasi</h2>
+                        <h3>Unduh aplikasi Bibalala di handphone atau tablet kamu</h3>
+                    </div>
+                </div>
+                <div class="downloadWrap">
+                    <a href=""><img src="~/img/btn-appStore.png" /></a>
+                    <a href=""><img src="~/img/btn-playStore.png" /></a>
+                </div>
+            </section>*@
+
+        <section id="contact" class="section">
+            <div class="container">
+                <div class="col-xs-12 col-sm-10 wrapper">
+                    <h2><span>@Html.PortalText(Repositories,"Community", "id")</span></h2>
+
+                    <div class="contact-wrap">
+                        <div class="sosmed-bottom">
+                            <div class="sosmed-list">
+                                <h4>@Html.PortalText(Repositories,"LetsJoinTheBibalala", "id")</h4>
+                                <a href="https://www.facebook.com/bibalala.english" target="_blank">
+                                    <div class="sosmed">
+                                        <i class="fa-brands fa-facebook-f"></i>
+                                    </div>
+                                    <!-- <span>Bibalala.english</span> -->
+                                </a>
+                                <a href="https://www.instagram.com/bibalala.english" target="_blank">
+                                    <div class="sosmed">
+                                        <i class="fa-brands fa-instagram"></i>
+                                    </div>
+                                    <!-- <span>Bibalala.english</span> -->
+                                </a>
+                                <a href="https://www.youtube.com/channel/UC_1K5I7qyxazdrmyEwd6WNw" target="_blank">
+                                    <div class="sosmed">
+                                        <i class="fa-brands fa-youtube"></i>
+                                    </div>
+                                    <!-- <span>Bibalala.english</span> -->
+                                </a>
+                                <a href="https://www.tiktok.com/@@bibalala.english" target="_blank">
+                                    <div class="sosmed">
+                                        <i class="fa-brands fa-tiktok"></i>
+                                    </div>
+                                    <!-- <span>Bibalala.english</span> -->
+                                </a>
+                            </div>
+
+                            <div class="call-us">
+                                @Html.PortalText(Repositories,"BibalalaEnglishPrepares", "id")
+                            </div>
+                        </div>
+
+                        <div class="img-bottom">
+                            <img src="img/rabbit.png" />
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <footer>
+                <div class="container">
+                    <div class="col-xs-12 col-sm-10 wrapper">
+                        <div class="years-wrap">
+                            <img src="img/logo-8e.png" class="logo8e" /> 8ELEMENTS <span class="years"></span>
+                        </div>
+                        <div class="copyright">
+                            © By Educa Corporation.
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </section>
+
+    </div>
+    <div class="block"></div>
+    <script type="text/javascript">
+        var myFullpage = new fullpage('#fullpage', {
+            verticalCentered: false,
+            anchors: ['Beranda', 'Konten-Pelajaran', 'Metode', 'Fitur', 'Tentang-Kami', 'Hubungi-Kami', 'Kontak'],
+            menu: '.navigation',
+            /*responsiveWidth: 800*/
+        });
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+    <script src="~/js/slick.min.js"></script>
+    <script>
+        $('#langOption').click(function () {
+            var ulTag = $('ul', this);
+            ulTag.slideToggle(200);
+        });
+
+        $('#langOption ul li').click(function () {
+            var txtTag = $(this).html();
+            $('#langOption .langSelect').html(txtTag);
+        });
+        //function checker() {
+        //    var isMobile = false;
+        //    if (/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|ipad|iris|kindle|Android|Silk|lge |maemo|midp|mmp|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i.test(navigator.userAgent)
+        //        || /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(navigator.userAgent.substr(0, 4))) {
+        //        isMobile = true;
+        //    }
+        //    if ($(window).width() > $(window).height()) {
+        //        console.log('mob');
+        //        $(".section").removeClass("fp-section");
+        //    } else {
+        //        console.log('desk');
+        //    };
+        //    if (window.matchMedia("(orientation: landscape)").matches) {
+        //        console.log('Land');
+        //    } else {
+        //        console.log('port');
+        //    }
+        //};
+        //checker();
+
+        //var orientation = screen.orientation.type;
+        //$(window).on("orientationchange", function (event) {
+        //    if (screen.orientation.type = landscape - primary) {
+        //    }
+        //});
+
+        //var orientation = (screen.orientation || {}).type || screen.mozOrientation || screen.msOrientation;
+        //if (orientation === "landscape-primary") {
+        //    $('.block').css('display', 'none');
+        //} else {
+        //    $('.block').css('display','block');
+        //}
+
+        $('.methode-learning_slide').slick({
+            dots: false,
+            infinite: false,
+            speed: 300,
+            arrows: false,
+            slidesToShow: 3,
+            responsive: [
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3,
+                        infinite: true,
+                        dots: false
+                    }
+                },
+                {
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                        dots: true,
+                        arrows: true,
+                    }
+                },
+                {
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                        dots: true,
+                        arrows: true,
+                    }
+                },
+            ]
+        });
+
+        $('.years').html(new Date().getFullYear());
+        $(".hamburgerBar").click(function () {
+            $("header").toggleClass("openNav");
+        });
+
+        $(".overlay, .nav-wrap").click(function () {
+            $("header").removeClass("openNav");
+        });
+
+        var errorModalTitle = "";
+        var message = "";
+
+        var input = jQuery("#name");
+        input.on('keyup keydown copy', function () {
+
+            $("#name").keypress("input", function (e) {
+                var k = e.keyCode,
+                    $notAllowSymbol = ((k > 64 && k < 91) || (k > 96 && k < 123) || k == 8 || k == 32 || (k >= 48 && k <= 57));
+
+                if (!$notAllowSymbol) {
+                    $('#notifName').remove();
+                    return false;
+                }
+            })
+
+            $('#notifName').remove();
+            cekEmptySpanName();
+            message = "";
+            cekName();
+            $("#notifName").html(message);
+        })
+
+        $("#email").on("input", function () {
+            $('#notifEmail').remove();
+            cekEmptySpanEmail();
+            message = "";
+            cekEmail();
+            $("#notifEmail").html(message);
+        })
+
+        $("#telp").on("input", function () {
+            $('#notifPhone').remove();
+            cekEmptySpanPhone();
+            message = "";
+            cekPhone();
+            $("#notifPhone").html(message);
+        });
+
+        $(document).ready(function () {
+            //GetGeoLocation();
+            cekEmptySpanName();
+            cekEmptySpanEmail();
+            cekEmptySpanPhone();
+            getCountryOption()
+        });
+
+        function onBlurName() {
+            $("#notifName").remove();
+        }
+        function onFocusName() {
+            var getNameArr = $(".formcard_wrap").find("p");
+            $(getNameArr[0]).append("<span class='notify' id='notifName'></span>");
+            message = "";
+            cekName();
+            $("#notifName").html(message);
+        }
+        function onBlurEmail() {
+            $("#notifEmail").remove();
+        }
+        function onFocusEmail() {
+            var getEmailArr = $(".formcard_wrap").find("p");
+            $(getEmailArr[1]).append("<span class='notify' id='notifEmail'></span>");
+            message = "";
+            cekEmail();
+            $("#notifEmail").html(message);
+        }
+
+        function onBlurPhone() {
+            $("#notifPhone").remove();
+            $("#notifPhoneCode").remove();
+        }
+        function onFocusPhone() {
+            var getPhoneArr = $(".formcard_wrap").find("p");
+            $(getPhoneArr[2]).append("<span class='notify' id='notifPhone'></span>");
+            message = "";
+            cekPhone();
+            $("#notifPhone").html(message);
+        }
+        function onBlurPhoneCode() {
+            $("#notifPhone").remove();
+            $("#notifPhoneCode").remove();
+        }
+        function onFocusPhoneCode() {
+            $("#notifPhoneCode").remove();
+            var messageCode = "<ul><li>Masukan Kode Negara</li></ul>";
+            var getPhoneArr = $(".formcard_wrap").find("p");
+            $(getPhoneArr[2]).append("<span class='notify' id='notifPhoneCode'></span>");
+
+            $("#notifPhoneCode").html(messageCode);
+        }
+        function cekEmptySpanPhone() {
+            var phone = $("#telp").val();
+            if (phone == '') {
+                $('#notifPhone').remove();
+            } else {
+                var getPhoneArr = $(".formcard_wrap").find("p");
+                $(getPhoneArr[2]).append("<span class='notify' id='notifPhone'></span>");
+            }
+        }
+        function validate(evt) {
+            var theEvent = evt || window.event;
+
+            // Handle paste
+            if (theEvent.type === 'paste') {
+                key = event.clipboardData.getData('text/plain');
+            } else {
+                // Handle key press
+                var key = theEvent.keyCode || theEvent.which;
+                key = String.fromCharCode(key);
+            }
+            var regex = /[0-9]/;
+            if (!regex.test(key)) {
+                theEvent.returnValue = false;
+                if (theEvent.preventDefault) theEvent.preventDefault();
+            }
+
+            $('#notifPhone').remove();
+            cekEmptySpanPhone();
+            message = "";
+            cekPhone();
+            $("#notifPhone").html(message);
+        }
+
+        function cekEmptySpanName() {
+            var name = $("#name").val();
+            if (name == '') {
+                $('#notifName').remove();
+            } else {
+                var getNameArr = $(".formcard_wrap").find("p");
+                $(getNameArr[0]).append("<span class='notify' id='notifName'></span>");
+            }
+        }
+        function cekEmptySpanEmail() {
+            var email = $("#email").val();
+            if (email == '') {
+                $('#notifEmail').remove();
+            } else {
+                var getEmailArr = $(".formcard_wrap").find("p");
+                $(getEmailArr[1]).append("<span class='notify' id='notifEmail'></span>");
+            }
+        }
+        function GetGeoLocation() {
+            var url = '/ContactUs/GetLocation';
+            $.ajax({
+                url: url,
+                success: function (respon) {
+                    var html = "";
+                    console.log(respon.countryCode);
+                    var getCountryCode = CountryCode(respon.countryCode);
+                    $("#codePhoneChange").val(getCountryCode.CountryCode);
+
+                    for (var a = 0; a < dataCountry.length; a++) {
+                        var getDataCountry = dataCountry[a];
+                        html += `<option value="${getDataCountry.PhoneCode}"> ${getDataCountry.PhoneCode}`;
+                        if (getDataCountry.PhoneCode.length == 3) {
+                            html += `&nbsp &nbsp`;
+                        }
+                        else if (getDataCountry.PhoneCode.length == 2) {
+                            html += `&nbsp &nbsp &nbsp`;
+                        }
+                        html += `${getDataCountry.Name}</option>`;
+                    }
+
+                    html += `<option value="">Other</option>`;
+
+                    $("#codePhone").html(html);
+
+                },
+                error: function () {
+                    alert("Error");
+                }
+            });
+        }
+
+        function changePhoneInOption(element) {
+            document.getElementById("codePhoneChange").value = element;
+            if (element == "") {
+                document.getElementById("codePhoneChange").focus();
+            } else {
+                document.getElementById("telp").focus();
+            }
+        }
+
+        // Country Code And ISOCodes All Coun https://countrycode.org/
+        function CountryCode(isoCodes) {
+            var getCountryCode = "";
+            var country = "";
+
+            for (var i = 0; i < dataCountry.length; i++) {
+                var dtCountry = dataCountry[i];
+                if (isoCodes == dtCountry.Code) {
+                    country = dtCountry.Name;
+                    getCountryCode = dtCountry.PhoneCode;
+                }
+            }
+
+            var dataArr = {
+                CountryCode: getCountryCode,
+                country: country
+            };
+            return dataArr;
+        }
+
+        var dataCountry = [];
+        function getCountryOption() {
+            var url = '/ContactUs/GetCountryList';
+            $.ajax({
+                url: url,
+                success: function (respon) {
+                    console.log(respon.data[1].Name, "===respon.data[1].Name")
+                    for (var i = 0; i < respon.data.length; i++) {
+                        var getData = respon.data[i];
+                        var objArr = { Name: getData.Name, PhoneCode: getData.PhoneCode, Code: getData.Code };
+                        dataCountry.push(objArr);
+                    }
+                    GetGeoLocation();
+                },
+                error: function () {
+                    alert("Error...!!!");
+                }
+            });
+
+        }
+
+        function cekName() {
+
+            var allMessageEnglish = '<ul> <li>At least 6 characters length and maximum of 25 characters </li> <li>Only contain letters and numbers (a-z and 0-9) </li><li>Username must be unique for each user</li></ul>';
+            var AllMessageIndo = '<ul> <li>Berjumlah antara 6 sampai 25 karakter </li> <li> Hanya memuat Huruf dan Angka (a-z dan 0-9), atau kombinasi keduanya </li></ul>';
+            var defaultErrorName = "Kolom nama salah, mohon ikuti format di bawah ini : ";
+            var pass1 = document.getElementById('name');
+            if (pass1.value.length < 6) {
+                message = 'At least 6 characters length';
+                message = AllMessageIndo;
+                errorModalTitle = defaultErrorName;
+            }
+            if (pass1.value.length >= 6) {
+                $('#notifName').remove();
+            }
+            if (pass1.value.length > 24) {
+                cekEmptySpanName();
+                message = 'maximum of 25 characters';
+                errorModalTitle = defaultErrorName;
+            }
+            if (pass1.value.length == 25) {
+                $('#notifName').remove();
+            }
+        }
+        function cekATSymbolInEmail(s) {
+            var rgx = /[@@]/;
+            return s.match(rgx);
+        }
+        function getCekDotEmail(s) {
+            var rgx = /[.]/;
+            return s.match(rgx);
+        }
+        function dotJustAllowInTheMiddle(s) {
+            var rgx = /^[^.]+\..*[^-_.]$/;
+            return s.match(rgx);
+        }
+        function getCekDot(s) {
+            var rgx = /[.]/;
+            return s.match(rgx);
+        }
+
+        function changeLanguage(lang) {
+            window.location.href = '/home/SetLanguage?culture=' + lang + '&returnUrl=' + window.location.pathname.toLowerCase();
+        }
+        function cekEmail() {
+
+            var defaultErrorEmail = "Kolom email salah, mohon ikuti format di bawah ini : ";
+            var allMessageEnglish = '<ul><li>Email address must not be empty</li> <li>Email address should contain the @@ symbol between the local part and the domain part </li> <li>The maximum length of the local part is 64 characters and the maximum length of the domain part is 255 characters </li><li> The domain part should contain at least one dot (.) character </li> <li>Email address must be unique for each user </li></ul>';
+            var allMessageIndo = '<ul> <li>Kolom harus diisi</li><li>Taruh simbol @@ antara nama email dan domainnya</li> <li>Panjang maksimum nama email adalah 64 karakter dan nama domain tidak boleh lebih dari karakter</li> <li>Nama domain juga harus memuat karakter titik (.)</li> <li>Nama email antara pengguna tidak boleh sama </li></ul>';
+
+            var email = $("#email").val();
+            var formatEmail = /^(([^<>()[\]\\.,;:\s@@"]+(\.[^<>()[\]\\.,;:\s@@"]+)*)|(".+"))@@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            var nilai = $("#email").val();
+            var cekDotEmail = getCekDotEmail(nilai);
+            var cekDotOnlyInTheMiddle = dotJustAllowInTheMiddle(nilai);
+
+            if (cekDotOnlyInTheMiddle == null) {
+                message = 'The dot (.) can only be placed in the middle of the text';
+                errorModalTitle = defaultErrorEmail;
+            }
+            if (cekDotEmail == null) {
+                message = 'The domain part should contain at least one dot (.) character';
+                errorModalTitle = defaultErrorEmail;
+            }
+            if (email == '') {
+                message = 'Email address must not be empty';
+                errorModalTitle = defaultErrorEmail;
+            }
+            if (message == '') {
+                $('#notifEmail').remove();
+            }
+            if (nilai.match(formatEmail)) {
+                $('#notifEmail').remove();
+                return true;
+            }
+            else {
+                // message = 'Format email Vailed';
+                var cekSymbolForEmail = cekATSymbolInEmail(nilai);
+                if (cekSymbolForEmail == null) {
+                    message = 'Email address should contain the @@ symbol between the local part and the domain part';
+                    errorModalTitle = defaultErrorEmail;
+                }
+                message = allMessageIndo;
+                return false;
+            }
+
+        }
+
+        function allowText(s) {
+            var rgx = /[qwertyuiopasdfghjklzxcvbnm<,.>/?;:''""!@@#$%^&*+-]/;
+            return s.match(rgx);
+        }
+        function cekPhone() {
+            var defaultErrorPhone = "Kolom telepon salah, mohon ikuti format di bawah ini : ";
+            var txtPhone = $("#telp").val();
+            var allMessageIndo = '<ul><li>Hanya cantumkan angka</li></ul>';
+            var dontAllowText = allowText(txtPhone);
+            if (dontAllowText != null) {
+                message = allMessageIndo;
+                errorModalTitle = defaultErrorPhone;
+            }
+            var cekDot = getCekDot(txtPhone);
+            if (cekDot != null) {
+                message = allMessageIndo;
+                errorModalTitle = defaultErrorPhone;
+            }
+
+            if (txtPhone == '') {
+                message = 'Phone Number must not be empty';
+                message = allMessageIndo;
+                errorModalTitle = defaultErrorPhone;
+            } else {
+                $('#notifPhone').remove();
+                $('#notifPhoneCode').remove();
+            }
+        }
+
+        function ValidasiAddData() {
+            message = "";
+            errorModalTitle = "";
+            cekName();
+            cekPhone();
+            var getEmail = cekEmail();
+            // if (getEmail == false) message = ' Format Email Failed';
+
+            if (message == '') {
+                AddDataPesan();
+            }
+            else {
+                var htmlModel = "";
+                var htmlTitle = "";
+                htmlTitle += errorModalTitle;
+                htmlModel += message;
+                $('#errorModalTitle').html(htmlTitle);
+                $("#errorModalTxt").html(htmlModel);
+                $('#errorModal').modal('show');
+
+            }
+
+        }
+        function AddDataPesan() {
+            var codePhone = $("#codePhoneChange").val();
+            var name = $("#name").val();
+            var email = $("#email").val();
+            var telp = $("#telp").val();
+            var message = $("#message").val();
+            var getMsisdn = codePhone + telp;
+            var data = {
+                FullName: name,
+                Email: email,
+                MSISDN: getMsisdn,
+                message: message
+            }
+            console.log(data.MSISDN, "=data.MSISDN");
+            var url = '/ContactUs/SendMessage';
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: data,
+                success: function (respon) {
+                    console.log(respon, "=> respon")
+                    var htmlTitleModel = "";
+                    var htmlModel = "";
+                    htmlTitleModel += respon.messageTitle;
+                    htmlModel += respon.message;
+                    $('#errorModalTitle').html(htmlTitleModel);
+                    $("#errorModalTxt").html(htmlModel);
+                    $('#errorModal').modal('show');
+                },
+                error: function () { alert("We will process your data, thank you.") }
+            });
+        }
+
+
+    </script>
+
+    <!-- Part Now -->
+    <!-- jQuery Modal -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+    <!-- End alert -->
+    <!-- End Part Now -->
+
+
+</body>
+</html>
+
+
+

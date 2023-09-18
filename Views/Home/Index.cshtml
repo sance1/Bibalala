@@ -1,0 +1,67 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@using Bibalala.Data;
+@inject IRepositories Repositories
+@using Bibalala.Helpers;
+
+
+<section id="callWe" class="section">
+    <div class="callWe-wrap">
+        <div class="img-left">
+            <img src="img/call-img_left.png" />
+        </div>
+        <div class="formInfo">
+            <div class="formInfo_card">
+                <h2>@Html.PortalText(Repositories, "ContactUs", "id")</h2>
+                <p>
+                    @Html.PortalText(Repositories, "GetTheLatestInformation", "id")
+                </p>
+                <h3>@Html.PortalText(Repositories, "EnterMessage", "id")</h3>
+                <div class="formcard_wrap">
+                    <p>
+                        <input id="name" type="text" class="ipt_form" placeholder="@Html.PortalText(Repositories,"YourName", "id")" min="6" maxlength="25" onblur="onBlurName()" onfocus="onFocusName()" autocomplete="off" required />
+                        <span id="notifName"></span>
+                    </p>
+                    <p>
+                        <input id="email" type="email" class="ipt_form" placeholder="@Html.PortalText(Repositories,"YourEMail", "id")" onblur="onBlurEmail()" onfocus="onFocusEmail()" autocomplete="off" />
+                        <!-- <input id="email" type="email" class="ipt_form" placeholder="E-mail Anda" /> -->
+                        <span id="notifEmail"></span>
+                    </p>
+                    <p>
+                        <span class="codeArea">
+                            +<input type="number" id="codePhoneChange" onblur="onBlurPhoneCode()" onfocus="onFocusPhoneCode()" value="" onKeyPress="if(this.value.length==3) return false;" style="width:30px;border:none;">
+                            <select id="codePhone" onchange="changePhoneInOption(this.value)" style="width:20px"></select>
+                        </span>
+                        <input id="telp" type="text" class="ipt_form" value="" placeholder="@Html.PortalText(Repositories,"YourPhoneNumber", "id")" onblur="onBlurPhone()" onfocus="onFocusPhone()" onkeypress="validate(event)" autocomplete="off" />
+                        <span id="notifPhoneCode"></span>
+                        <span id="notifPhone"></span>
+                        <!-- End Part Now -->
+                    </p>
+                    <p>
+                        <textarea id="message" placeholder="@Html.PortalText(Repositories,"YourMessage", "id")" maxlength="255" autocomplete="off"></textarea>
+                    </p>
+                    <p>
+                        <button type="button" onclick="ValidasiAddData()">@Html.PortalText(Repositories, "SendMessage", "id")</button>
+                    </p>
+                </div>
+
+            </div>
+        </div>
+        <div class="img-right">
+            <img src="img/call-img_right.png" />
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
